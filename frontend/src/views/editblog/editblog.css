@@ -1,0 +1,56 @@
+.img-edit {
+    width: 100%;
+    border-radius: 5px;
+    height: 350px;
+}
+
+.btn-submit {
+    width:100%;
+    background-color:black;
+    padding:10px;
+    border-radius: 5px;
+    color:white;
+}
+
+.btn-submit:hover {
+    opacity: 0.8;
+}
+
+.form-style {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.img-add {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.max-width {
+    max-width:578px ;
+}
+
+.upload-box {
+    font-size:16px;
+    background:white;
+    border-radius: 50px;
+    box-shadow: 2px 4px 2px rgba(0, 0, 0, 0.6);
+    width: 100px;
+}
+
+::-webkit-file-upload-button {
+    color: white;
+    background-color: black;
+    border-radius: 50px;
+    padding:10px;
+    border: none;
+    outline:none;
+}
+
+::-webkit-file-upload-button:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+
+    
