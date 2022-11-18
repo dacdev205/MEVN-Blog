@@ -36,7 +36,7 @@
          <div class="angle" style="
             position: absolute;
             transform: rotate(3deg);
-            width: 60px;
+            width: 80px;
             right: -40px;
             height: 101%;
             background: white;

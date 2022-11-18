@@ -18,15 +18,15 @@
                 </div>
                 <div class="col-lg-6 col-md-6 content-about about3">
                     <p class="title-about-child">Parsonal Core Values</p>
-                    <img height="150" src="./education.png" alt="">
-                    <img height="150" src="./approved.png" alt="">
-                    <img height="150" src="./achievement.png" alt="">
+                    <img height="150" src="/education.png" alt="">
+                    <img height="150" src="/approved.png" alt="">
+                    <img height="150" src="/achievement.png" alt="">
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12 content-about about4">
                     <div class="image-about">
-                        <img height="150" src="./target.png" alt="">
+                        <img height="150" src="/target.png" alt="">
                     </div>
                     <div style="margin-left: 155px;">
                         <p  class="title-about-child">Personal Statement</p>

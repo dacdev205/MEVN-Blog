@@ -1,5 +1,5 @@
 <script>
-import API from "../../api"
+import API from "../api"
 export default {
     data() {
         return {
@@ -33,28 +33,34 @@ export default {
 
 <template>
     <div id="addblog" class="container-md max-width ">
-        <form  @submit.prevent="submitBlog()" enctype="multipart/form-data" class="form-style mt-3">
+        <Form  @submit="submitBlog()" enctype="multipart/form-data" class="form-style mt-3">
             <div class="mb-3">
-                <img class="img-add" src="./image/timon-klauser-3MAmj1ZKSZA-unsplash.jpg" alt="">
+                <img class="img-add" src="/timon-klauser-3MAmj1ZKSZA-unsplash.jpg" alt="">
             </div>
             <div class="mb-3">
-                <input v-model="blog.title" type="text" class="form-control" required id=""  placeholder="Title">
+                <Field :rules="titleIsvalid" name="title" v-model="blog.title" type="text" class="form-control" placeholder="Title"/>
+                <ErrorMessage style="color:red;" name="title"/>
             </div>
             <div class="mb-3">
-                <input v-model="blog.category" type="text" class="form-control" required id=""  placeholder="What type your blog?">
+                <Field :rules="typeIsvalid" name="category" v-model="blog.category" type="text" class="form-control"  placeholder="What type your blog?"/>
+                <ErrorMessage style="color:red;" name="category"/>
             </div>
             <div class="mb-3">
-                <textarea  v-model="blog.content" type="text" class="form-control" required id=""  placeholder="Tell your story..."> </textarea>
+                <Field v-model="blog.content" type="text" class="form-control" placeholder="Tell your story..." :rules="contentIsvalid"  name="content">
+                </Field> 
+                <ErrorMessage style="color:red;" name="content"/>
             </div>
             <div class="mb-3">
-                <input v-model="blog.author" type="text" class="form-control" required id=""  placeholder="Your nickname">
+                <Field :rules="requiredIsvalid" name="author" v-model="blog.author" type="text" class="form-control"   placeholder="Your nickname"/>
+                <ErrorMessage style="color:red;" name="author"/>
             </div>
             <div class="mb-3">
-                <input class="upload-box" required id="" ref="file" @change="selectfile" type="file" >
+                <input class="upload-box" ref="file" @change="selectfile" type="file" />
             </div>
             <button type="submit" class="btn-submit">Create blog</button>
-        </form>
+        </Form>
     </div>
+    <br>
 </template>
 
 <style scoped>
@@ -106,3 +112,29 @@ export default {
     opacity: 0.8;
 }
 </style>
+
+<script setup>
+import { Field, Form, ErrorMessage } from 'vee-validate';
+import * as yup from 'yup';
+   const titleIsvalid = yup
+        .string()
+        .required("Please required this field.")
+        .min(5, "Title must be at least 5 characters.")
+        .max(20, "Title must be at most 20 characters.")
+    
+   const typeIsvalid = yup
+        .string()
+        .required("Please required this field.")
+        .max(10, "Type must be at most 10 characters.")
+        .min(3, "Type must be at least 3 characters.")
+
+    const contentIsvalid = yup
+        .string()
+        .required("Please required this field.")
+        .min(20, "Title must be at least 20 characters.")    
+
+    const requiredIsvalid = yup
+        .string()
+        .required("Please required this field.")
+
+</script>

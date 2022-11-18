@@ -10,12 +10,11 @@
 </template>
 
 <script>
-import Header from "./components/header/Header.vue";
+import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
 import ToggleToTop from "./components/ToggleToTop.vue";
 import Loading from "./components/Loading.vue";
 import Alert from "./components/Alert.vue";
-
     export default {
         name: 'app',
         components: {Header,Footer,ToggleToTop,Loading,Alert},
@@ -40,7 +39,6 @@ import Alert from "./components/Alert.vue";
                 }
                     
                 },
-
             toggle() {
                 if(this.mode === 'dark') {
                     this.mode = 'light'
@@ -61,11 +59,9 @@ import Alert from "./components/Alert.vue";
             }
         }
     };
-
 </script>
 
 <style>
-
     .page {
         text-align: center;
     }
@@ -102,12 +98,10 @@ import Alert from "./components/Alert.vue";
     }
     body::-webkit-scrollbar-thumb:hover {
         background: linear-gradient(transparent, #006eff);
-
     }
  
     .dark {
         background: #1c0522 !important;
         color: #F3F3F3 !important;
     }
-
 </style>

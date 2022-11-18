@@ -1,6 +1,6 @@
 <template>
     <div id="contact" class="img-contact">
-        <img src="./image/dimitar-belchev-fRBpWLAcWIY-unsplash.jpg" class="contact-img"  alt="">
+    <img src="/public/dimitar-belchev-fRBpWLAcWIY-unsplash.jpg" class="contact-img"  alt="">
         <div class="content-section container max-width mt-5">
         <div class="row contact-content">
             <div style="font-weight: 200;" class="col col-haft contact-infor">

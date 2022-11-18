@@ -1,8 +1,7 @@
 <script>
-    import router from "../../router";
+    import router from "../router/index";
     import "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
-    import "./header"
-    import Toggle from "../Toggle.vue"
+    import Toggle from "./Toggle.vue"
     export default {
         props: ['mode'],
         components: {
@@ -22,13 +21,76 @@
     function showMenu() {
         document.querySelector(".navlink").classList.toggle("mobile-menu");
     }
+    document.addEventListener("scroll", scrollMe);
+function scrollMe() {
+    try {
+        let value = window.scrollY;
+        document.getElementById("moon").style.top = value * 1.05 + 'px';
+        document.getElementById("starts").style.left = value * 0.5 + 'px';
+        document.getElementById("mountains_behind").style.top = value * 0.5 + 'px';
+        document.getElementById("mountains_front").style.top = value * 0 + 'px';
+        document.getElementById("text").style.marginRight = value * 0.5 + 'px';
+        document.getElementById("text2").style.top = value * -0.5 + 'px';
+        document.getElementById("forest").style.top = value * 0.25 + 'px';
+        document.getElementById("rock").style.top = value * -0.09 + 'px';
+        var header = document.querySelector("header");
+        header.classList.toggle("sticky",window.scrollY > 0);
+    } catch (error) {
+        return;
+    }
+}
+document.addEventListener("click", function(e) {
+    try {
+        const clickLinknClose = document.querySelector('.profile-menu .menu ul li');
+        let menuToggle = document.querySelector('.menu');
+        if(clickLinknClose.contains(e.target) && menuToggle.classList.contains('active')) {
+            menuToggle.classList.remove('active');
+        }
+    } catch (error) {
+        return;
+    }
+});
+
+document.addEventListener("click", function(e) {
+    try {
+        const profileMenu = document.querySelector('.profile-menu');
+        let menuToggle = document.querySelector('.menu');
+        if(!profileMenu.contains(e.target) && menuToggle.classList.contains('active')) {
+            menuToggle.classList.remove('active');
+    }
+    } catch (error) {
+        return;
+    }
+
+});
+
+document.addEventListener("click",function(e) {
+        try {
+            const menuMobile = document.querySelector('.navlink');
+            let navlink = document.querySelector('.navlink');
+            if(menuMobile.contains(e.target) && navlink.classList.contains('mobile-menu')){
+                navlink.classList.remove('mobile-menu');
+            }
+        } catch (error) {
+            return;
+        }
+})
+document.addEventListener("click",function(e) {
+    const navLinks = document.querySelectorAll('.navlink li a');
+    for(let i = 0; i < navLinks.length; i++) {
+        var Link = navLinks[i];
+        if(Link.contains(e.target)){
+            Link.classList.add('activeLink');
+        } 
+    }
+})
 
 </script>
 
 <template>
     <header class="header"  >
         <router-link :to="{name: 'home'}" class="logo">
-                <img height="50" src="./image/logo.png" alt="">
+                <img height="50" src="/logo.png" alt="">
             </router-link>
             <ul class="navlink">
                 <li>
@@ -59,11 +121,11 @@
                 <div class="mainMenu-mobile" style="margin-left: 10px;">
                     <div class="profile-menu" v-if="isLoggedIn">
                         <div class="action" id="action" @click="menuShow()">
-                            <img class="imge-user" id="imge-user" src="./image/userr.png" alt=""> 
+                            <img class="imge-user" id="imge-user" src="/userr.png" alt=""> 
                         </div>
                         <div class="menu" id="subMenu">
                         <div class="profile">
-                            <img src="./image/userr.png" alt="">
+                            <img src="/userr.png" alt="">
                             <div class="infor">
                                 <h2>dac dep chai</h2>
                                 <p>@dac</p>
@@ -106,46 +168,20 @@
                 </div>
         </header>
     <section id="section1">
-        <img src="./image/stars.png" id="starts" class="starts" alt="">
-        <img src="./image/moon.png" id="moon" alt="">
-        <img src="./image/mountains_behind.png" id="mountains_behind" alt="">
+        <img src="/stars.png" id="starts" class="starts" alt="">
+        <img src="/moon.png" id="moon" alt="">
+        <img src="/mountains_behind.png" id="mountains_behind" alt="">
         <h2 id="text">dac blog</h2>
-        <img src="./image/mountains_front.png" id="mountains_front" alt="">
+        <img src="/mountains_front.png" id="mountains_front" alt="">
     </section>
 
     <section id="section2">
         <h2 id="text2">dac blog</h2>
-        <img id="forest" src="./image/forest.png" alt="">
-        <img id="rock" src="./image/rookk.png" alt="">
-        <img id="river" src="./image/river.png" alt="">
+        <img id="forest" src="/forest.png" alt="">
+        <img id="rock" src="/rookk.png" alt="">
+        <img id="river" src="/river.png" alt="">
     </section>
 </template>
-
-<script setup>
-
-import { onMounted, ref } from "vue";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-const isLoggedIn = ref(false);
-
-let auth;
-onMounted(() => {
-    auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            isLoggedIn.value = true;
-        } else {
-            isLoggedIn.value = false;
-        }
-    });
-});
-
-const hadleSignOut = () => {
-    signOut(auth).then(() => {
-        router.push("/");
-    });
-};
-
-</script>
 
 <style scoped>
 
@@ -520,3 +556,26 @@ header.sticky {
     }
 }
 </style>
+
+<script setup>
+import { onMounted, ref } from "vue";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+const isLoggedIn = ref(false);
+let auth;
+onMounted(() => {
+    auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            isLoggedIn.value = true;
+        } else {
+            isLoggedIn.value = false;
+        }
+    });
+});
+const hadleSignOut = () => {
+    signOut(auth).then(() => {
+        router.push("/");
+    });
+};
+</script>
+

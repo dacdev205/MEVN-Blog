@@ -31,7 +31,7 @@
         <img class="img-home" :src="PF + `/${blog.image}`" alt="loi hinh anh" />
       </div>
       <div class="col-7" v-if="!isLoggedIn">
-        <img class="img-home" src="./img/viet-blog-3.jpg" alt="loi hinh anh" />
+        <img class="img-home" src="/aesthetic-art-desktop-sand-dunes-kulmn1twfm7752su.jpg" alt="loi hinh anh" />
       </div>
     </div>
     <div class="counter-up">
@@ -114,13 +114,12 @@
 
 
 <script>
-import "../Blogs.vue"
 import "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.js";
 import API from "../../api";
-import Blogs from "../Blogs.vue"
 import "./home"
+import Blog from "../Blogs.vue"
 export default {
-  components: {Blogs},
+  components:{Blog},
   data() {
     return {
       blogs: [],
@@ -136,16 +135,13 @@ export default {
     this.blogs = await API.getAllBlog();
   },
 };
-
 </script>
 
 <script setup>
 import "https://kit.fontawesome.com/9039f40edf.js";
 import { onMounted, ref } from "vue";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-
 const isLoggedIn = ref(false);
-
 let auth;
 onMounted(() => {
   auth = getAuth();
@@ -174,12 +170,10 @@ onMounted(() => {
     color: white;
     
 }
-
 .card:hover .title-blog {
     opacity: 1;
     transition:0.6s;
 }
-
 .content .title-blog {
     text-align: center;
     position: absolute;
@@ -190,7 +184,6 @@ onMounted(() => {
 .content .title-blog a {
     color: white;
 }
-
 .text-desc {
     position: absolute;
     top: 50%;
@@ -199,11 +192,9 @@ onMounted(() => {
     font-weight: 200;
     font-size: 16px;
 }
-
 .text-desc > span {
     font-size:28px;
 }
-
 .img-home {
     width: 100%;
     height: 650px;
@@ -223,26 +214,21 @@ onMounted(() => {
     margin-top: 100px;
     margin-left: 10px;
 }
-
 .register-footer-home {
     padding: 10px 20px;
     border-radius: 30px;
     background-color: black;
 }
-
 .register-footer-home:hover {
     color: #fff;
     text-decoration: none;
 }
-
 .counter-up {
-
     min-height: 60vh;
     padding: 0 50px;
     display: flex;
     align-items: center;
 }
-
 .counter-up .content {
     display: flex;
     width: 100%;
@@ -251,7 +237,6 @@ onMounted(() => {
     justify-content: space-between;
     flex-wrap: wrap;
 }
-
 .content .box {
     width: calc(25% - 30px);
     border:2px dashed gray;
@@ -263,18 +248,14 @@ onMounted(() => {
     justify-content: space-evenly;
     flex-direction: column;
 }
-
 .content .box .icon {
     font-size: 50px;
 }
-
 .content .box .counter {
     font-size: 50px;
     font-weight: 400;
     font-family: sans-serif;
 }
-
-
 @media (max-width: 1036px) {
     .img-home {
         max-width: 100%;
@@ -293,9 +274,7 @@ onMounted(() => {
     .title-blog-home {
         font-size:25px;
     }
-
 }
-
 @media (max-width: 580px) {
     .img-home {
         max-width: 100%;

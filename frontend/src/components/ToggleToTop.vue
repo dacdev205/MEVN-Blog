@@ -1,6 +1,6 @@
 <template>
 <div class="sroll-to-top">
-    <a href="#"><img height="50" src="./top-up.png" alt=""></a>
+    <a href="#"><img height="50" src="/top-up.png" alt=""></a>
 </div>
 </template>
 

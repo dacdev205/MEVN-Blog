@@ -5,54 +5,84 @@ const routes = [
     path: "/",
     name: "home",
     component: () => import("../views/home/Home.vue"),
+    meta: {
+        title: "Home",
+    }
     },
     {
         path: "/about",
         name: "about",
-        component: () => import("../views/about/About.vue"),
+        component: () => import("../views/About.vue"),
+        meta: {
+            title: "About",
+        }
     },
     {
         path: "/login",
         name: "login",
         component: () => import("../views/Login.vue"),
+        meta: {
+            title: "Login",
+        }
     },
     {
         path: "/register",
         name: "register",
         component: () => import("../views/Register.vue"),
+        meta: {
+            title: "Register",
+        }
     },
 
     {
         path: "/blogs",
         name: "blogs",
         component: () => import("../views/Blogs.vue"),
+        meta: {
+            title: "Blogs",
+        }
     },
 
     {
         path: "/contact",
         name: "contact",
-        component: () => import("../views/contact/Contact.vue"),
+        component: () => import("../views/Contact.vue"),
+        meta: {
+            title: "Contact",
+        }
 
     },
     {
         path: "/blog-detail/:id",
         name: "blogdetail",
         component: () => import("../components/BlogDetail.vue"),
+        meta: {
+            title: "Blog detail",
+        }
     },
     {
         path: "/addblog",
         name: "addblog",
-        component: () => import("../views/addblog/AddBlog.vue"),
+        component: () => import("../views/AddBlog.vue"),
+        meta: {
+            title: "Add Blog",
+        }
     },
     {
         path: "/:pathMatch(.*)*",
         name: "notfound",
         component: () => import("../views/NotFound.vue"),
+        meta: {
+            title: "Not Found",
+        }
     },
     {
         path: "/edit-blog/:id",
         name: "editblog",
-        component: () => import("../views/editblog/EditBlog.vue"),
+        component: () => import("../views/EditBlog.vue"),
+        meta: {
+            title: "Edit Blog",
+        }
     },
  
 ];
@@ -77,31 +107,9 @@ const router = createRouter({
     }
 });
 
-const getCurrentUser = () => {
-    return new Promise((resolve, reject) => {
-        const removeListener = onAuthStateChanged(
-            getAuth(),
-            (user) => {
-                removeListener();
-                resolve(user);
-            },
-            reject
-        );
-    });
-}
-
-
 router.beforeEach(async (to, from, next) => {
-    if(to.matched.some((record) => record.meta.requiresAuth)) {
-        if(await getCurrentUser()) {
-            next();
-        } else {
-            alert("You dont have access!");
-            next("/");
-        }
-    }else {
-        next();
-    }
+    document.title = `${to.meta.title}`;
+    next();
 });
 
 export default router;

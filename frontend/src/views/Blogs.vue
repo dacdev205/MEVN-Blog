@@ -107,6 +107,9 @@ export default {
         this.emoji = null;
 
     },
+    change () {
+        
+    }
    },
 }
 document.addEventListener("click", function(e) {
@@ -117,7 +120,7 @@ document.addEventListener("click", function(e) {
             if(toggleBtn.contains(e.target)) {
                 var card = cards[i]
                 card.classList.toggle('toggleActive')
-            } 
+            }
         } 
     } catch (error) {
     }
@@ -196,17 +199,16 @@ document.addEventListener("click", function(e) {
                 <input id="findBlogByType" v-model="findBlogByType"  @change="changeTypeSearch()" type="checkbox" class="">
             </label>
             </div>
-            
         </div>
         
         <br>
         <br>
         <br>
  
-        <div v-if="isLoggedIn" class="toggle">
-            <button v-if="!toggle" class="toggle2select" >Toggle to select</button>
+        <div class="toggle" v-if="isLoggedIn">
+            <button v-if="!toggle" class="toggle2select" @change="change()" >Toggle to select</button>
         </div>
-        <div v-if="isLoggedIn" class="selectAll">
+        <div class="selectAll">
             <div class="select2del">
                 <button class="deleteSelectBlog" v-if="checked" @click="deleteRecords(selected)">Delete</button>
             </div>
@@ -236,39 +238,17 @@ document.addEventListener("click", function(e) {
                                         Read More
                                     </router-link>
                                 </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-              
-            </div>   
+                </div>   
+            </div>
+
+            <br>
+            <br>
+            <br>
         </div>
-        <br>
-        <br>
-        <br>
-    </div>
-</template>
-
-
-<script setup>
-
-import { onMounted, ref } from "vue";
-import { getAuth, onAuthStateChanged} from "firebase/auth";
-
-const isLoggedIn = ref(false);
-
-let auth;
-onMounted(() => {
-    auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            isLoggedIn.value = true;
-        } else {
-            isLoggedIn.value = false;
-        }
-    });
-});
-
-</script>
+    </template>
 
 <style >
 .main-find {
@@ -541,3 +521,20 @@ input[type="checkbox"] {
     }
 }
 </style>
+
+<script setup>
+import { onMounted, ref } from "vue";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+const isLoggedIn = ref(false);
+let auth;
+onMounted(() => {
+  auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      isLoggedIn.value = true;
+    } else {
+      isLoggedIn.value = false;
+    }
+  });
+});
+</script>
